@@ -132,7 +132,7 @@ dotnet test
 
 **Unit Testing Results Screenshot**
 
-![RaceDay unit testing results](docs/images/unit-test-results.png)
+![RaceDay unit testing results](docs/images/Screenshot 2026-10-19 174331.png)
 
 *Figure 3: Automated unit test results.*
 
