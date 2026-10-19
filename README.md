@@ -73,7 +73,8 @@ Swagger provides an interactive interface for viewing and testing the API endpoi
 
 The screenshot below shows the RaceDay API running locally in Swagger, with endpoints for authentication, enrolments, and events.
 
-![RaceDay API running in Swagger](docs/images/raceday-swagger.png)
+![RaceDay API running in Swagger]<img width="1915" height="978" alt="Screenshot 2026-10-19 184126" src="https://github.com/user-attachments/assets/46c89858-1d3e-4809-8142-e82acbca97b8" />
+
 
 *Figure 1: RaceDay RESTful API endpoints displayed in Swagger.*
 
@@ -103,7 +104,8 @@ The pipeline is configured to build the project and run automated tests when the
 
 **GitHub Actions Build Screenshot**
 
-![Successful RaceDay GitHub Actions workflow](docs/images/github-actions-success.png)
+![Successful RaceDay GitHub Actions workflow]<img width="1919" height="982" alt="Screenshot 2026-10-19 184204" src="https://github.com/user-attachments/assets/f3e23497-b0ae-4ba8-9f46-bf5dab165571" />
+
 
 *Figure 2: GitHub Actions CI/CD workflow completing successfully.*
 
@@ -115,28 +117,33 @@ https://github.com/10452327/RaceDaySystem/actions/runs/39282805406
 
 ## 6. Unit Testing
 
-The project includes a `RaceDay.Tests` project for automated testing. The tests use xUnit and may use an Entity Framework Core In-Memory Database, depending on the test configuration.
+The RaceDay project includes a `RaceDay.Tests` project for automated testing using xUnit. Unit tests are used to verify the behaviour of the API, including participant registration, authentication, and input validation.
 
-The tests are intended to validate functionality such as:
+The tests help identify errors and confirm that the application responds correctly to valid and invalid requests.
 
-- Participant registration.
-- User authentication.
-- Role-based access control.
-- API functionality and expected responses.
+### Unit Testing Results
 
-Run the tests from the repository root:
+The following screenshot shows the test results in Visual Studio's Test Explorer.
+
+![RaceDay unit testing results]<img width="1919" height="1079" alt="Screenshot 2026-10-19 174331" src="https://github.com/user-attachments/assets/4d80d98e-47db-47ad-a4b2-a6ce2564620b" />
+
+
+**Test results:**
+- **Total tests:** 3
+- **Passed:** 3
+- **Failed:** 0
+- **Skipped:** 0
+- **Status:** Successful
+
+*Figure 3: RaceDay unit tests executed successfully in Visual Studio Test Explorer.*
+
+These results demonstrate that all three tests passed during this test run, with no failures or skipped tests.
+
+To run the tests again, execute the following command from the repository root:
 
 ```bash
 dotnet test
 ```
-
-**Unit Testing Results Screenshot**
-
-![RaceDay unit testing results](docs/images/Screenshot 2026-10-19 174331.png)
-
-*Figure 3: Automated unit test results.*
-
-> Replace the placeholder image with a screenshot of your actual test results. The GitHub Actions screenshot confirms a successful build-and-test workflow, but it does not independently show the detailed unit test results.
 
 ## 7. Video Demonstration
 
@@ -158,4 +165,4 @@ xUnit (n.d.) *xUnit.net documentation*. Available at: https://xunit.net/ (Access
 
 ### AI Disclosure
 
-Generative AI tools, including Gemini and GitHub Copilot, were used as collaborative assistants for tasks such as code structuring, debugging API routing, developing test ideas, and formatting project documentation. The project authors are responsible for reviewing the code and ensuring that the submitted documentation accurately reflects the implemented system.
+GitHub Copilot, were used as collaborative assistants for tasks such as code structuring, debugging API routing, developing test ideas. The project authors are responsible for reviewing the code and ensuring that the submitted documentation accurately reflects the implemented system.
