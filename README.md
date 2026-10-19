@@ -147,7 +147,7 @@ dotnet test
 
 ## 7. Video Demonstration
 
-**YouTube Video Link:**
+**YouTube Video Link:** https://youtu.be/rAZn2e2qqvA?si=_FInqrhQVuBmoonC 
 
 The video demonstration should show the application running, the Swagger interface, the main API endpoints, relevant registration and authentication functionality, and the execution of automated tests.
 
