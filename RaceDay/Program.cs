@@ -23,9 +23,14 @@ namespace RaceDay
             });
 
             // 3. Add Controllers and OpenAPI / Swagger
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped<RaceDay.Services.AzureBlobService>();
 
             var app = builder.Build();
 

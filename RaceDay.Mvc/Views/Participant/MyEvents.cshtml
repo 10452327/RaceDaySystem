@@ -1,0 +1,45 @@
+@model IEnumerable<RaceDay.Mvc.Models.EnrolmentItem>
+@{
+    ViewData["Title"] = "My Events";
+}
+
+<h1 class="h3 fw-bold mb-4">My Enrolled Events</h1>
+
+<div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Event</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="5" class="text-center text-muted py-4">You haven't enrolled in any events yet. <a asp-action="Index">Browse races</a>.</td></tr>
+                }
+                else
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@item.EventName</td>
+                            <td>@item.EventDate.ToString("dd MMM yyyy")</td>
+                            <td>@item.Location</td>
+                            <td>@item.CategoryName</td>
+                            <td>
+                                <span class="badge @(item.Status == "Confirmed" ? "bg-success" : item.Status == "Cancelled" ? "bg-danger" : "bg-secondary")">
+                                    @item.Status
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

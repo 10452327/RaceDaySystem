@@ -1,0 +1,65 @@
+@model IEnumerable<RaceDay.Mvc.Models.EnrolmentItem>
+@{
+    var ev = ViewBag.Event as RaceDay.Mvc.Models.EventItem;
+    ViewData["Title"] = "Event Enrolments";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 fw-bold mb-0">Enrolments — @ev?.Name</h1>
+        <p class="text-muted small mb-0">View registered participants and manage entry statuses.</p>
+    </div>
+    <a class="btn btn-outline-secondary" asp-action="Events">Back to Events</a>
+</div>
+
+<div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Participant</th>
+                    <th>Email</th>
+                    <th>Category</th>
+                    <th>Enrolled Date</th>
+                    <th>Status</th>
+                    <th class="text-end">Update Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="6" class="text-center text-muted py-4">No participants enrolled yet.</td></tr>
+                }
+                else
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@item.ParticipantName</td>
+                            <td>@item.ParticipantEmail</td>
+                            <td>@item.CategoryName</td>
+                            <td>@item.EnrolledAt.ToString("dd MMM yyyy")</td>
+                            <td>
+                                <span class="badge @(item.Status == "Confirmed" ? "bg-success" : item.Status == "Cancelled" ? "bg-danger" : "bg-secondary")">
+                                    @item.Status
+                                </span>
+                            </td>
+                            <td class="text-end">
+                                <form asp-action="UpdateEnrolmentStatus" method="post" class="d-inline-flex gap-1">
+                                    <input type="hidden" name="enrolmentId" value="@item.Id" />
+                                    <input type="hidden" name="eventId" value="@ev?.Id" />
+                                    <select name="status" class="form-select form-select-sm" style="width: auto;">
+                                        <option value="Confirmed" selected="@(item.Status == "Confirmed")">Confirmed</option>
+                                        <option value="Pending" selected="@(item.Status == "Pending")">Pending</option>
+                                        <option value="Cancelled" selected="@(item.Status == "Cancelled")">Cancelled</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-sm btn-outline-dark">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

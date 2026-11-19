@@ -13,6 +13,9 @@
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
 
+        public string Status { get; set; } = "Confirmed"; // e.g., "Confirmed" or "Pending"
         public DateTime EnrolledAt { get; set; } = DateTime.UtcNow;
+
+        public Result? Result { get; set; }
     }
 }

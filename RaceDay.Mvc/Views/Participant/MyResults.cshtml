@@ -1,0 +1,41 @@
+@model IEnumerable<RaceDay.Mvc.Models.ResultItem>
+@{
+    ViewData["Title"] = "My Results";
+}
+
+<h1 class="h3 fw-bold mb-4">My Race Results</h1>
+
+<div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Event</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Finish Time</th>
+                    <th>Position</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="5" class="text-center text-muted py-4">No race results published for you yet.</td></tr>
+                }
+                else
+                {
+                    @foreach (var r in Model)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@r.EventName</td>
+                            <td>@r.EventDate.ToString("dd MMM yyyy")</td>
+                            <td>@r.CategoryName</td>
+                            <td class="fw-bold">@r.FinishTime.ToString(@"hh\:mm\:ss")</td>
+                            <td><span class="badge bg-warning text-dark">#@r.Position</span> of @r.TotalFinishers finishers</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -71,7 +71,7 @@ namespace RaceDay.Controllers
             HttpContext.Session.SetString("UserEmail", user.Email);
             HttpContext.Session.SetString("UserRole", user.Role);
 
-            return Ok(new { message = "Login successful!", role = user.Role });
+            return Ok(new { message = "Login successful!", role = user.Role, userId = user.Id });
         }
 
         [HttpPost("logout")]

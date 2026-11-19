@@ -1,0 +1,55 @@
+@model RaceDay.Mvc.Models.EventItem
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="mb-3">
+    <a class="btn btn-sm btn-outline-secondary" asp-action="Index">← Back to Events</a>
+</div>
+
+<div class="card border-0 shadow-sm overflow-hidden col-lg-8">
+    @if (!string.IsNullOrWhiteSpace(Model.BannerImageUrl))
+    {
+        <img src="@Model.BannerImageUrl" alt="@Model.Name" style="max-height: 260px; width: 100%; object-fit: cover;" />
+    }
+    <div class="card-body p-4">
+        <div class="d-flex gap-2 mb-2">
+            <span class="badge bg-dark">@Model.EventType</span>
+            <span class="badge bg-warning text-dark">@Model.Distance km</span>
+        </div>
+        <h1 class="h2 fw-bold">@Model.Name</h1>
+        <p class="text-muted">@Model.Description</p>
+
+        <div class="row g-3 my-3 p-3 bg-light rounded">
+            <div class="col-sm-6"><strong>Date:</strong> @Model.Date.ToString("dddd, dd MMM yyyy")</div>
+            <div class="col-sm-6"><strong>Location:</strong> @Model.Location</div>
+        </div>
+
+        <hr />
+        <h5 class="fw-bold mb-3">Enter This Event</h5>
+
+        @if (!Model.Categories.Any())
+        {
+            <div class="alert alert-warning mb-0">No race categories have been added for this event yet.</div>
+        }
+        else
+        {
+            <form asp-action="Enrol" method="post" class="row g-3 align-items-end">
+                <input type="hidden" name="eventId" value="@Model.Id" />
+                <div class="col-sm-8">
+                    <label class="form-label">Select Category</label>
+                    <select name="categoryId" class="form-select" required>
+                        <option value="">-- Choose a category --</option>
+                        @foreach (var cat in Model.Categories)
+                        {
+                            <option value="@cat.Id">@cat.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-sm-4 d-grid">
+                    <button type="submit" class="btn btn-raceday">Confirm Entry</button>
+                </div>
+            </form>
+        }
+    </div>
+</div>

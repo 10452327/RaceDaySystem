@@ -1,0 +1,50 @@
+@model RaceDay.Mvc.Models.EventItem
+@{
+    ViewData["Title"] = "Event Categories";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 fw-bold mb-0">Categories — @Model.Name</h1>
+        <p class="text-muted small mb-0">Add race categories (e.g., 5km Fun Run, 10km Open, 21.1km Half Marathon).</p>
+    </div>
+    <a class="btn btn-outline-secondary" asp-action="Events">Back to Events</a>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-5">
+        <div class="card border-0 shadow-sm p-4">
+            <h5 class="fw-bold mb-3">Add Category</h5>
+            <form asp-action="AddCategory" method="post">
+                <input type="hidden" name="eventId" value="@Model.Id" />
+                <div class="mb-3">
+                    <label class="form-label">Category Name</label>
+                    <input type="text" name="categoryName" class="form-control" placeholder="e.g. 10km Sprint" required />
+                </div>
+                <button type="submit" class="btn btn-raceday w-100">Add Category</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <div class="card border-0 shadow-sm p-4">
+            <h5 class="fw-bold mb-3">Existing Categories (@Model.Categories.Count)</h5>
+            @if (!Model.Categories.Any())
+            {
+                <p class="text-muted mb-0">No categories added yet.</p>
+            }
+            else
+            {
+                <ul class="list-group list-group-flush">
+                    @foreach (var cat in Model.Categories)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>@cat.Name</span>
+                            <span class="badge bg-light text-dark border">ID #@cat.Id</span>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+</div>

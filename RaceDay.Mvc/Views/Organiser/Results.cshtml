@@ -1,0 +1,58 @@
+@model IEnumerable<RaceDay.Mvc.Models.EnrolmentItem>
+@{
+    var ev = ViewBag.Event as RaceDay.Mvc.Models.EventItem;
+    ViewData["Title"] = "Publish Results";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 fw-bold mb-0">Results — @ev?.Name</h1>
+        <p class="text-muted small mb-0">Record or update finish times (HH:MM:SS) and finishing positions.</p>
+    </div>
+    <a class="btn btn-outline-secondary" asp-action="Events">Back to Events</a>
+</div>
+
+<div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Participant</th>
+                    <th>Category</th>
+                    <th>Current Finish Time</th>
+                    <th>Current Position</th>
+                    <th>Enter / Update Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="5" class="text-center text-muted py-4">No enrolled participants for this event.</td></tr>
+                }
+                else
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@item.ParticipantName</td>
+                            <td>@item.CategoryName</td>
+                            <td>@(item.FinishTime?.ToString(@"hh\:mm\:ss") ?? "—")</td>
+                            <td>@(item.Position?.ToString() ?? "—")</td>
+                            <td>
+                                <form asp-action="SaveResult" method="post" class="d-flex flex-wrap gap-2 align-items-center">
+                                    <input type="hidden" name="enrolmentId" value="@item.Id" />
+                                    <input type="hidden" name="eventId" value="@ev?.Id" />
+                                    <input type="text" name="finishTime" class="form-control form-control-sm" style="width: 115px;"
+                                           value="@(item.FinishTime?.ToString(@"hh\:mm\:ss") ?? "00:45:00")" placeholder="HH:MM:SS" required />
+                                    <input type="number" name="position" class="form-control form-control-sm" style="width: 85px;" min="1"
+                                           value="@(item.Position ?? 1)" placeholder="Pos" required />
+                                    <button type="submit" class="btn btn-sm btn-raceday">Save</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
